@@ -9,6 +9,7 @@ from addcard import insert_card_db, DB_PATH, LOCK_PATH
 from db_utils import verify_card
 from addcard import atomic_write_json  # si existe en addcard
 from auth import verify_master_code
+from stepMotor.motor import motor
 
 def mode_register(user_id, stop_flag):
     reader = RFIDReader(debounce_seconds=2.0)
@@ -71,6 +72,7 @@ def mode_verify(stop_flag, allow_menu=True, master_code=None, open_menu_func=Non
             user = verify_card(serial)
             if user:
                 print(f"? Bienvenido, {user}! Tarjeta verificada correctamente.")
+                motor()
             else:
                 print("? Tarjeta no registrada.")
 

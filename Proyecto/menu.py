@@ -1,5 +1,6 @@
 from modes import mode_register, mode_delete
 from addcard import DB_PATH, LOCK_PATH
+from teclado import get_code
 import os
 import signal
 
@@ -11,10 +12,12 @@ def open_menu(master_code, stop_flag):
         print("2. Eliminar tarjeta")
         print("3. Volver a modo verificacion")
         print("4. Terminar programa")
-        choice = input("Selecciona opcion (1/2/3/4): ").strip()
+        choice = get_code()
+        print(f" seleccion {choice}")
+        #choice = input("Selecciona opcion (1/2/3/4): ").strip()
 
         if choice == "1":
-            user_id = input("Nombre de usuario para asociar a la tarjeta: ").strip()
+            user_id = input("Nombre de usuario para asociarssa la tarjeta: ").strip()
             if user_id:
                 mode_register(user_id, stop_flag)
         elif choice == "2":
@@ -29,3 +32,4 @@ def open_menu(master_code, stop_flag):
         else:
             print("[SYS] Opcion invalida. Intenta de nuevo.")
     return None
+
